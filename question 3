@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>  // For using std::string and std::string functions
+
+using namespace std;
+
+int main() {
+    string str, searchSeq;
+
+    // Input the string from the user
+    cout << "Enter a string: ";
+    getline(cin, str);  // Use getline to read the entire line, including spaces
+
+    // Input the sequence of 3 characters from the user
+    cout << "Enter a sequence of 3 characters to search for: ";
+    getline(cin, searchSeq);
+
+    // Check if the sequence has exactly 3 characters
+    if (searchSeq.length() != 3) {
+        cout << "The search sequence must be exactly 3 characters long!" << endl;
+        return 1;  // Exit the program with an error
+    }
+
+    // Search for the sequence using the find() function
+    size_t found = str.find(searchSeq);
+
+    // Check if the sequence is found
+    if (found != string::npos) {
+        cout << "Found the sequence '" << searchSeq << "' at position: " << found << endl;
+    } else {
+        cout << "The sequence '" << searchSeq << "' was not found in the string." << endl;
+    }
+
+    return 0;
+}
