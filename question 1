@@ -1,0 +1,34 @@
+#include <iostream>
+
+int main() {
+    
+    int* sales_data = new int[100];  
+    // Initialize all elements to 0
+    for (int i = 0; i < 100; ++i) {
+        sales_data[i] = 0;  // Set each element to 0 (you can use actual data here)
+    }
+
+    // Step 2: Resize the array to 200 elements
+    int* resized_sales_data = new int[200];  // Create a new array of 200 elements
+
+    // Copy old data (100 elements) to the resized array
+    for (int i = 0; i < 100; ++i) {
+        resized_sales_data[i] = sales_data[i];
+    }
+
+    // Initialize the remaining new elements (from 101 to 200) to 0
+    for (int i = 100; i < 200; ++i) {
+        resized_sales_data[i] = 0;
+    }
+
+    // Step 3: Free the old memory
+    delete[] sales_data;  // Deallocate the old array as it is no longer needed
+
+    // Step 4: Verify the new size (200 elements)
+    std::cout << "Array size after resizing: 200" << std::endl;
+
+    // Clean up by deleting the resized array
+    delete[] resized_sales_data;
+
+    return 0;
+}
