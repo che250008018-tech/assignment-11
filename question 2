@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstring>  // For strcpy to copy strings
+
+using namespace std;
+
+// Define the Student structure
+struct Student {
+    char name[50];
+    int age;
+    char gender[10];
+    char branch[50];
+};
+
+int main() {
+    // Step 1: Dynamically allocate an array of size 100 for students
+    Student* students = new Student[100];  // Array to store 100 students
+
+    // Initialize first 100 students (for example, setting some dummy data)
+    for (int i = 0; i < 100; ++i) {
+        // Set some example data for each student
+        snprintf(students[i].name, sizeof(students[i].name), "Student %d", i + 1);  // Name: Student 1, Student 2, ...
+        students[i].age = 20 + (i % 5);  // Random age between 20 to 24
+        snprintf(students[i].gender, sizeof(students[i].gender), (i % 2 == 0) ? "Male" : "Female");  // Alternate gender
+        snprintf(students[i].branch, sizeof(students[i].branch), "Branch %d", (i % 3) + 1);  // Branch 1, Branch 2, Branch 3
+    }
+
+    // Step 2: Resize the array to store 200 students
+    Student* resized_students = new Student[200];  // Allocate memory for 200 students
+
+    // Copy the original 100 students to the resized array
+    for (int i = 0; i < 100; ++i) {
+        resized_students[i] = students[i];  // Copy each student's data to new array
+    }
+
+    // Initialize the remaining 100 students (from index 100 to 199) with dummy data
+    for (int i = 100; i < 200; ++i) {
+        snprintf(resized_students[i].name, sizeof(resized_students[i].name), "Student %d", i + 1);
+        resized_students[i].age = 20 + (i % 5);
+        snprintf(resized_students[i].gender, sizeof(resized_students[i].gender), (i % 2 == 0) ? "Male" : "Female");
+        snprintf(resized_students[i].branch, sizeof(resized_students[i].branch), "Branch %d", (i % 3) + 1);
+    }
+
+    // Step 3: Free the memory of the original array as we no longer need it
+    delete[] students;
+
+    // Step 4: Verify that we resized the array to 200 students
+    cout << "Array size after resizing: 200" << endl;
+
+    // Optional: Print out details of the first 5 students to verify
+    for (int i = 0; i < 5; ++i) {
+        cout << "Student " << i + 1 << ": " << resized_students[i].name << ", "
+             << resized_students[i].age << " years old, "
+             << resized_students[i].gender << ", "
+             << resized_students[i].branch << endl;
+    }
+
+    // Step 5: Clean up by freeing the memory for the resized array
+    delete[] resized_students;
+
+    return 0;
+}
